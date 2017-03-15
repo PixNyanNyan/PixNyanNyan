@@ -1,3 +1,6 @@
-<p>
-  home works!
-</p>
+
+<post-form></post-form>
+<hr />
+<div id="threads" class="autopagerize_page_element">
+  <thread-post *ngFor="let thread of threads" [thread]="thread"></thread-post>
+</div>

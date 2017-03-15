@@ -9,12 +9,18 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ThreadComponent } from './thread/thread.component';
+import { PostFormComponent } from './post-form/post-form.component';
+import { ThreadPostComponent } from './thread-post/thread-post.component';
+import { StatusComponent } from './status/status.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ThreadComponent
+    ThreadComponent,
+    PostFormComponent,
+    ThreadPostComponent,
+    StatusComponent
     ],
   imports: [
     RouterModule.forRoot(ROUTES, {
