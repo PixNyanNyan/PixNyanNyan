@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { Post } from '../appService';
+
 @Component({
   selector: 'thread-post',
   templateUrl: './thread-post.component.html',
@@ -8,7 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ThreadPostComponent implements OnInit {
 
   @Input()
-  thread: any;
+  thread: Post;
 
   constructor() { }
 
