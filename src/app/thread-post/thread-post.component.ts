@@ -12,6 +12,9 @@ export class ThreadPostComponent implements OnInit {
   @Input()
   thread: Post;
 
+  @Input()
+  replyMode: boolean;
+
   constructor() { }
 
   ngOnInit() {

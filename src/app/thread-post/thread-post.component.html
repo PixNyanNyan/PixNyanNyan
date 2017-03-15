@@ -3,7 +3,7 @@
     檔名：<a href="http://myth.nagatoyuki.org/src/1489539217048.jpg" rel="_blank">1489539217048.jpg</a>-(12 KB, 468x265) <small>[以預覽圖顯示]</small><br /><a href="http://myth.nagatoyuki.org/src/1489539217048.jpg" rel="_blank"><img src="http://myth.nagatoyuki.org/thumb/1489539217048s.jpg" style="width: 250px; height: 142px;" class="img" alt="12 KB" title="12 KB" /></a>
   </div>
   <input type="checkbox" [name]="thread?.no" value="delete" /><span class="title">{{thread?.message}}</span>
-  名稱: <span class="name">{{thread?.author}}</span> [17/03/13(一)02:21 ID:{{thread?.id}}] <a href="pixmicat.php?res=564088#q564088" class="qlink">No.{{thread?.no}}</a>&nbsp;<a [routerLink]="['thread', thread?.no]" >[回應]</a>
+  名稱: <span class="name">{{thread?.author}}</span> [17/03/13(一)02:21 ID:{{thread?.id}}] <a href="pixmicat.php?res=564088#q564088" class="qlink">No.{{thread?.no}}</a>&nbsp;<a *ngIf="!replyMode" [routerLink]="['thread', thread?.no]" >[回應]</a>
   <div class="quote" [innerHTML]="thread?.message"></div>
 </div>
 
