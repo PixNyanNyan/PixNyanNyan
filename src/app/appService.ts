@@ -12,65 +12,77 @@ export class AppService {
 
     threads: Post[] = [
         {
-            no: 1,
+            id: 1,
             title: '無標題',
             author: '無名氏',
-            created_at: 'yyyy-MM-ddTHH:mm:ssZ',
+            email: null,
+            createdAt: 'yyyy-MM-ddTHH:mm:ssZ',
+            updatedAt: null,
             imageFileName: '123.jpg',
             imageFileSize: 123,
-            id: '炫炮ID1',
+            identityHash: '炫炮ID1',
             message: '無內文1',
             replies: [
                 {
-                    no: 2,
+                    id: 2,
                     title: '無標題',
                     author: '無名氏',
-                    created_at: 'yyyy-MM-ddTHH:mm:ssZ',
+                    email: null,
+                    createdAt: 'yyyy-MM-ddTHH:mm:ssZ',
+                    updatedAt: null,
                     imageFileName: '',
                     imageFileSize: 123,
-                    id: '炫炮ID2',
+                    identityHash: '炫炮ID2',
                     message: '無內文2'
                 },
                 {
-                    no: 3,
+                    id: 3,
                     title: '無標題',
                     author: '無名氏',
-                    created_at: 'yyyy-MM-ddTHH:mm:ssZ',
+                    email: null,
+                    createdAt: 'yyyy-MM-ddTHH:mm:ssZ',
+                    updatedAt: null,
                     imageFileName: '',
                     imageFileSize: 123,
-                    id: '炫炮ID2',
+                    identityHash: '炫炮ID2',
                     message: '無內文3'
                 }
             ]
         },
         {
-            no: 4,
+            id: 4,
             title: '無標題',
             author: '無名氏',
-            created_at: 'yyyy-MM-ddTHH:mm:ssZ',
+            email: null,
+            createdAt: 'yyyy-MM-ddTHH:mm:ssZ',
+            updatedAt: null,
             imageFileName: '123.jpg',
             imageFileSize: 123,
-            id: '炫炮ID4',
+            identityHash: '炫炮ID4',
             message: '無內文4',
             replies: [
                 {
-                    no: 5,
+                    id: 5,
                     title: '無標題',
                     author: '無名氏',
-                    created_at: 'yyyy-MM-ddTHH:mm:ssZ',
+                    email: null,
+                    createdAt: 'yyyy-MM-ddTHH:mm:ssZ',
+                    updatedAt: null,
                     imageFileName: '',
                     imageFileSize: 123,
-                    id: '炫炮ID5',
+                    identityHash: '炫炮ID5',
                     message: '無內文5'
                 },
                 {
-                    no: 6,
+                    id: 6,
                     title: '無標題',
                     author: '無名氏',
-                    created_at: 'yyyy-MM-ddTHH:mm:ssZ',
+                    email: null,
+                    createdAt: 'yyyy-MM-ddTHH:mm:ssZ',
+                    updatedAt: null,
                     imageFileName: '',
                     imageFileSize: 123,
-                    id: '炫炮ID6',
+                    identityHash: '炫炮ID6',
                     message: '無內文6'
                 }
             ]
@@ -87,22 +99,28 @@ export class AppService {
         });
     }
 
-    getThread(no: number): Observable<Post> {
+    getThread(id: number): Observable<Post> {
         return Observable.create((observer: Observer<Post>) =>{
-            observer.next(this.threads[no % this.threads.length]);
+            observer.next(this.threads[id % this.threads.length]);
             observer.complete();
         });
     }
 }
 
 export class Post {
-    no: number;
-    title?: string;
-    author?: string;
-    created_at: Date | string;
+    id: number;
+    title: string;
+    author: string;
+    email: string;
+    createdAt: Date | string;
+    updatedAt: Date | string;
     imageFileName?: string;
     imageFileSize?: number;
-    id: string;
+    imageContentType?: string;
+    imageUpdatedAt?: Date | string;
+    identityHash: string;
     message: string;
+    locked?: boolean;
+    admin?: boolean;
     replies?: Post[];
 }
