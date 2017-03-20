@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { Ng2Cable, Broadcaster } from 'ng2-cable/js/index';
+
 import { ROUTES } from './app.routes';
 import { AppService } from './appService';
 import { Config } from './config';
@@ -33,6 +35,8 @@ import { StatusComponent } from './status/status.component';
     HttpModule
   ],
   providers: [
+    Ng2Cable,
+    Broadcaster,
     Config,
     {
       provide: APP_INITIALIZER,
