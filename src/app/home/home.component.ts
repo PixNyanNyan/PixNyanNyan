@@ -10,15 +10,14 @@ import { AppService, Post } from '../appService';
 export class HomeComponent implements OnInit {
     threads: Post[];
 
-    constructor(private appService: AppService)
-    {
+    constructor(private appService: AppService) {
+    }
+
+    ngOnInit() {
         this.appService
             .getThreads()
             .subscribe(res => {
                 this.threads = res;
             });
-    }
-
-    ngOnInit() {
     }
 }

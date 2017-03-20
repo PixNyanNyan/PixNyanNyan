@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { ROUTES } from './app.routes';
 import { AppService } from './appService';
+import { Config } from './config';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -32,8 +33,19 @@ import { StatusComponent } from './status/status.component';
     HttpModule
   ],
   providers: [
+    Config,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: InitialConfigLoad,
+      deps: [Config],
+      multi: true
+    },
     AppService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function InitialConfigLoad(config: Config) {
+    return () => config.load();
+};
