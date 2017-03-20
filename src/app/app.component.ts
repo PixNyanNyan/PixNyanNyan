@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Ng2Cable, Broadcaster } from 'ng2-cable/js/index';
+import { Ng2Cable } from 'ng2-cable/js/index';
 
 import { Config } from './config';
 
@@ -13,15 +13,9 @@ export class AppComponent {
     title: string = 'NyanNyan';
 
     constructor(
-      private ng2cable: Ng2Cable,
-      private broadcaster: Broadcaster,
-      private config: Config
+        private ng2cable: Ng2Cable,
+        private config: Config
     ) {
         this.ng2cable.subscribe(config.get('actionCableUrl'), 'PostsChannel');
-        this.broadcaster
-            .on<any>('create')
-            .subscribe(post => {
-                console.log('create', post);
-            });
     }
 }

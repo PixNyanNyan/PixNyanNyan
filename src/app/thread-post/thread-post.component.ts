@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Post } from '../appService';
+import { IPost } from '../appService';
 import { Config } from '../config';
 
 @Component({
@@ -11,7 +11,7 @@ import { Config } from '../config';
 export class ThreadPostComponent implements OnInit {
 
     @Input()
-    thread: Post;
+    thread: IPost;
 
     @Input()
     replyMode: boolean;

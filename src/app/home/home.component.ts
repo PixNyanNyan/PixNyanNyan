@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Broadcaster } from 'ng2-cable/js/index';
 
-import { AppService, Post } from '../appService';
+import { AppService, IPost } from '../appService';
 
 @Component({
     selector: 'app-home',
@@ -8,9 +9,21 @@ import { AppService, Post } from '../appService';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    threads: Post[];
+    threads: IPost[];
 
-    constructor(private appService: AppService) {
+    constructor(
+        private broadcaster: Broadcaster,
+        private appService: AppService
+    ) {
+        this.broadcaster
+            .on<any>('create')
+            .map<IPost>(message => JSON.parse(message.obj))
+            .filter(post => !post.parentPostId)
+            .subscribe(post => {
+                if (this.threads) {
+                    this.threads.unshift(post);
+                }
+            });
     }
 
     ngOnInit() {

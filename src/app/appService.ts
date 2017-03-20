@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, ResponseContentType } from '@angular/http';
 import { Observable, Observer } from 'rxjs';
+import { snakeCase } from 'change-case';
 
 import { Config } from './config';
 
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 /**
  * 伺服器服務
@@ -20,21 +21,48 @@ export class AppService {
         this.apiUrl = this.config.get('apiUrl');
     }
 
-    getThreads(): Observable<Post[]> {
+    getThreads(): Observable<IPost[]> {
         return this.http.get(this.apiUrl + 'threads', {
             responseType: ResponseContentType.Json
-        }).map(res => <Post[]>res.json());
+        }).map(res => <IPost[]>res.json());
     }
 
-    getThread(id: number): Observable<Post> {
+    getThread(id: number): Observable<IPost> {
         return this.http.get(this.apiUrl + 'threads/' + id, {
             responseType: ResponseContentType.Json
-        }).map(res => <Post>res.json());
+        }).map(res => <IPost>res.json());
+    }
+
+    createPost(model: ICreatePostModel): Observable<IPost> {
+        return Observable.create(observer => {
+            var formData: FormData = new FormData();
+            var xhr: XMLHttpRequest = new XMLHttpRequest();
+
+            for (let i in model) {
+                if (!model[i])
+                    continue;
+                formData.append(`post[${snakeCase(i)}]`, model[i]);
+            }
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        observer.next(JSON.parse(xhr.response));
+                        observer.complete();
+                    } else {
+                        observer.error(xhr.response);
+                    }
+                }
+            };
+
+            xhr.open('POST', this.apiUrl + 'posts', true);
+            xhr.send(formData);
+        });
     }
 }
 
-export class Post {
+export interface IPost {
     id: number;
+    parentPostId?: number;
     title: string;
     author: string;
     email: string;
@@ -48,5 +76,14 @@ export class Post {
     message: string;
     locked?: boolean;
     admin?: boolean;
-    replies?: Post[];
+    replies?: IPost[];
+}
+
+export interface ICreatePostModel {
+    title?: string;
+    author?: string;
+    email?: string;
+    message?: string;
+    parentPostId?: number;
+    image?: File;
 }
