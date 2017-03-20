@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Post } from '../appService';
+import { Config } from '../config';
 
 @Component({
   selector: 'thread-post',
@@ -9,15 +10,25 @@ import { Post } from '../appService';
 })
 export class ThreadPostComponent implements OnInit {
 
-  @Input()
-  thread: Post;
+    @Input()
+    thread: Post;
 
-  @Input()
-  replyMode: boolean;
+    @Input()
+    replyMode: boolean;
 
-  constructor() { }
+    defaultMessage: {
+        title: string,
+        author: string,
+        message: string
+    };
 
-  ngOnInit() {
-  }
+    constructor(
+        private config: Config
+    ) {
+        this.defaultMessage = config.get('defaultMessage');
+    }
+
+    ngOnInit() {
+    }
 
 }

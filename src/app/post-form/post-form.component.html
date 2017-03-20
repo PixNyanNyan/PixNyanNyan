@@ -1,3 +1,50 @@
-<p>
-  post-form works!
-</p>
+
+<form (ngSubmit)="onSubmit()">
+<div id="postform">
+
+<input type="hidden" name="mode" value="regist" />
+<input type="hidden" name="MAX_FILE_SIZE" value="2048000" />
+<input type="hidden" name="upfile_path" value="" />
+
+<div style="text-align: center;">
+<table cellpadding="1" cellspacing="1" id="postform_tbl" style="margin: 0px auto; text-align: left;">
+<tr><td class="Form_bg"><b>名 稱</b></td><td><input class="hide" type="text" name="name" value="spammer" /><input type="text" name="fjkajddsdo" id="fname" size="28" value="" /></td></tr>
+<tr><td class="Form_bg"><b>E-mail</b></td><td><input type="text" name="afjkadppd" id="femail" size="28" value="" /><input type="text" class="hide" name="email" value="foo@foo.bar" /></td></tr>
+<tr><td class="Form_bg"><b>標 題</b></td><td><input class="hide" value="DO NOT FIX THIS" type="text" name="sub" /><input type="text" name="faif10EE" id="fsub" size="28" value="" /><input type="submit" name="sendbtn" value="送 出" /></td></tr>
+<tr><td class="Form_bg"><b>內 文</b></td><td><textarea name="pOBdKSKlK" id="fcom" cols="48" rows="4" style="width: 400px; height: 80px;"></textarea><textarea name="com" class="hide" cols="48" rows="4">EID OG SMAPS</textarea></td></tr>
+<tr><td class="Form_bg"><b>附加圖檔</b></td><td><input type="file" name="upfile" id="fupfile" size="25" /><input class="hide" type="checkbox" name="reply" value="yes" />[<input type="checkbox" name="noimg" id="noimg" value="on" /><label for="noimg">無貼圖</label>]
+[<input type="checkbox" name="up_series" id="up_series" value="on" /><label for="up_series">連貼機能</label>]
+</td></tr>
+
+<tr><td class="Form_bg"><b>刪除用密碼</b></td><td><input type="password" name="pwd" size="8" maxlength="8" value="" /><small>(刪除文章用。英數字8字元以內)</small></td></tr>
+<tr><th class="Form_bg">驗證碼</th><td><script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LcS8AATAAAAAGZ0MGKsxukzKJa-Mn6iavZOxqfo"></script>
+
+	<noscript>
+  		<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LcS8AATAAAAAGZ0MGKsxukzKJa-Mn6iavZOxqfo" height="300" width="500" frameborder="0"></iframe><br/>
+  		<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+  		<input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
+	</noscript><small>(大小寫和符號需留意，請協助典籍數位化計劃)</small></td></tr>
+
+<tr><td colspan="2">
+<div id="postinfo">
+<ul><li>可附加圖檔類型：GIF, JPG, PNG, SWF，瀏覽器才能正常附加圖檔</li><li>附加圖檔最大上傳資料量為 2000 KB。當回文時E-mail填入sage為不推文功能</li><li>當檔案超過寬 250 像素、高 250 像素時會自動縮小尺寸顯示</li>
+<li>目前附加圖檔使用量大小： 221828 KB / 3000000 KB</li>
+
+<li><font color="FF0000">推廣：鬧板、攻擊性發言、煽動性發言請無視（回應者也無視），並向<a href="http://2cat.or.tp/~ad/0d/">管理室</a>回報。</font></li>
+	<li>本版以網絡、現實流傳的流言驗證和澄清為主題。</li>
+	<li>本版一切內容均由留言者提供，本人不保證內容的正確性及不為內容所帶來的一切後果負上責任。</li>
+	<li>各位請小心處理會影響人物或機構名譽相關的內容，本人不為這些流言帶來的任何損失負責。</li>
+	<li>如果閣下或貴機構覺得相關留言有侵犯到閣下的利益，請<a href="/cdn-cgi/l/email-protection#f9989d949097b997989e988d96808c9290d7968b9e">來信</a>告之，一定盡快處理。</li>
+	<li>如引用其他地方資料請註明出處</li>
+	<li>本版的內容不建議作為學術性的參考</li>
+	<li>本版內容可能含有具高度危險性的操作及操作示範，未經訓練及有適當裝備者切勿模仿。</li>
+	<li>文字政策：基本上以正體中文為主，日英等文字請依著需要酌量使用，大陸同好請愛用轉換軟件。</li>
+	<li>開串政策：不足五十字的發文，請附上與內文相關或質素夠高的圖。</li>
+</ul>
+</div>
+</td></tr>
+</table>
+</div>
+<hr />
+</div>
+</form>
