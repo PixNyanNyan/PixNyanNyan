@@ -11,10 +11,10 @@ import { Config } from '../config';
 export class ThreadPostComponent implements OnInit {
 
     @Input()
-    thread: IPost;
+    thread = <IPost>null;
 
     @Input()
-    replyMode: boolean;
+    replyMode: boolean = false;
 
     defaultMessage: {
         title: string,

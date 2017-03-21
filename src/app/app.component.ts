@@ -10,12 +10,13 @@ import { Config } from './config';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title: string = 'NyanNyan';
+    title: string;
 
     constructor(
         private ng2cable: Ng2Cable,
         private config: Config
     ) {
+        this.title = config.get('title');
         this.ng2cable.subscribe(config.get('actionCableUrl'), 'PostsChannel');
     }
 }
