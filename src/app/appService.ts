@@ -3,7 +3,7 @@ import { Http, Response, Headers, ResponseContentType } from '@angular/http';
 import { Observable, Observer } from 'rxjs';
 import { snakeCase } from 'change-case';
 
-import { Config } from './config';
+import { ConfigService } from './configService';
 
 import 'rxjs/add/operator/map';
 
@@ -16,7 +16,7 @@ export class AppService {
 
     constructor(
         private http: Http,
-        private config: Config
+        private config: ConfigService
     ) {
         this.apiUrl = this.config.get('apiUrl');
     }
@@ -33,11 +33,12 @@ export class AppService {
         }).map(res => <IPost>res.json());
     }
 
-    createPost(model: ICreatePostModel): Observable<IPost> {
+    createPost(model: ICreatePostModel, recaptchaToken: string): Observable<IPost> {
         return Observable.create(observer => {
             var formData: FormData = new FormData();
             var xhr: XMLHttpRequest = new XMLHttpRequest();
 
+            formData.append('g-recaptcha-response', recaptchaToken);
             for (let i in model) {
                 if (!model[i])
                     continue;

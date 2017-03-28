@@ -3,7 +3,7 @@ import { Http, Response, Headers, ResponseContentType } from '@angular/http';
 import { Observable, Observer } from 'rxjs';
 
 @Injectable()
-export class Config {
+export class ConfigService {
     private _config: any;
 
     constructor(private http: Http) {

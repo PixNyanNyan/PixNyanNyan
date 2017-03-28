@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { IPost } from '../appService';
-import { Config } from '../config';
+import { ConfigService } from '../configService';
 
 @Component({
   selector: 'thread-post',
@@ -23,7 +23,7 @@ export class ThreadPostComponent implements OnInit {
     };
 
     constructor(
-        private config: Config
+        private config: ConfigService
     ) {
         this.defaultMessage = config.get('defaultMessage');
     }

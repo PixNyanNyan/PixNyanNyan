@@ -17,14 +17,8 @@
 </td></tr>
 
 <tr><td class="Form_bg"><b>刪除用密碼</b></td><td><input type="password" name="pwd" size="8" maxlength="8" value="" /><small>(刪除文章用。英數字8字元以內)</small></td></tr>
-<tr><th class="Form_bg">驗證碼</th><td><script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LcS8AATAAAAAGZ0MGKsxukzKJa-Mn6iavZOxqfo"></script>
-
-	<noscript>
-  		<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LcS8AATAAAAAGZ0MGKsxukzKJa-Mn6iavZOxqfo" height="300" width="500" frameborder="0"></iframe><br/>
-  		<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-  		<input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
-	</noscript><small>(大小寫和符號需留意，請協助典籍數位化計劃)</small></td></tr>
-
+<tr><th class="Form_bg">驗證碼</th><td><re-captcha [site_key]="recaptchaSiteKey" (captchaResponse)="handleCorrectCaptcha($event)"></re-captcha>
+<small>(大小寫和符號需留意，請協助典籍數位化計劃)</small></td></tr>
 <tr><td colspan="2">
 <div id="postinfo">
 <ul><li>可附加圖檔類型：GIF, JPG, PNG, SWF，瀏覽器才能正常附加圖檔</li><li>附加圖檔最大上傳資料量為 2000 KB。當回文時E-mail填入sage為不推文功能</li><li>當檔案超過寬 250 像素、高 250 像素時會自動縮小尺寸顯示</li>

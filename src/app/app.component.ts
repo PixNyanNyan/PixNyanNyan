@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Ng2Cable } from 'ng2-cable/js/index';
 
-import { Config } from './config';
+import { ConfigService } from './configService';
 
 @Component({
     selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent {
 
     constructor(
         private ng2cable: Ng2Cable,
-        private config: Config
+        private config: ConfigService
     ) {
         this.title = config.get('title');
         this.ng2cable.subscribe(config.get('actionCableUrl'), 'PostsChannel');

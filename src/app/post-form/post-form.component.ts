@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ICreatePostModel, AppService } from '../appService';
+import { ConfigService } from '../configService';
 
 @Component({
     selector: 'post-form',
@@ -12,6 +13,9 @@ export class PostFormComponent implements OnInit {
     @Input()
     parentPostId: number;
 
+    recaptchaSiteKey: string;
+    recaptchaToken: string;
+
     model: ICreatePostModel = {
         email: null,
         title: null,
@@ -22,11 +26,17 @@ export class PostFormComponent implements OnInit {
     };
 
     constructor(
-        private appService: AppService
+        private appService: AppService,
+        private config: ConfigService
     ) {
+        this.recaptchaSiteKey = config.get('recaptchaSiteKey');
     }
 
     ngOnInit() {
+    }
+
+    handleCorrectCaptcha(token) {
+        this.recaptchaToken = token;
     }
 
     onSubmit() {
@@ -34,7 +44,7 @@ export class PostFormComponent implements OnInit {
         if (this.parentPostId)
             this.model.parentPostId = this.parentPostId;
         this.appService
-            .createPost(this.model)
+            .createPost(this.model, this.recaptchaToken)
             .subscribe(res => {
                 this.model = {
                     email: null,

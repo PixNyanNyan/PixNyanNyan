@@ -5,10 +5,11 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { Ng2Cable, Broadcaster } from 'ng2-cable/js/index';
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 import { ROUTES } from './app.routes';
 import { AppService } from './appService';
-import { Config } from './config';
+import { ConfigService } from './configService';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -32,16 +33,17 @@ import { StatusComponent } from './status/status.component';
     }),
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ReCaptchaModule
   ],
   providers: [
     Ng2Cable,
     Broadcaster,
-    Config,
+    ConfigService,
     {
       provide: APP_INITIALIZER,
       useFactory: InitialConfigLoad,
-      deps: [Config],
+      deps: [ConfigService],
       multi: true
     },
     AppService
@@ -50,6 +52,6 @@ import { StatusComponent } from './status/status.component';
 })
 export class AppModule { }
 
-export function InitialConfigLoad(config: Config) {
+export function InitialConfigLoad(config: ConfigService) {
     return () => config.load();
 };
