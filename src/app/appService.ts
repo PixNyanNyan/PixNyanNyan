@@ -46,7 +46,7 @@ export class AppService {
             }
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
+                    if (200 <= xhr.status && xhr.status <= 299) {
                         observer.next(JSON.parse(xhr.response));
                         observer.complete();
                     } else {
