@@ -17,7 +17,7 @@
 </td></tr>
 
 <tr><td class="Form_bg"><b>刪除用密碼</b></td><td><input type="password" name="pwd" size="8" maxlength="8" value="" /><small>(刪除文章用。英數字8字元以內)</small></td></tr>
-<tr><th class="Form_bg">驗證碼</th><td><re-captcha [site_key]="recaptchaSiteKey" (captchaResponse)="handleCorrectCaptcha($event)"></re-captcha>
+<tr><th class="Form_bg">驗證碼</th><td><re-captcha #reCaptcha [site_key]="recaptchaSiteKey" (captchaResponse)="handleCorrectCaptcha($event)"></re-captcha>
 <small>(大小寫和符號需留意，請協助典籍數位化計劃)</small></td></tr>
 <tr><td colspan="2">
 <div id="postinfo">

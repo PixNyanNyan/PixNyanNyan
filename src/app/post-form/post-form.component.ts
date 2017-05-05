@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ReCaptchaComponent } from 'angular2-recaptcha';
 
 import { ICreatePostModel, AppService } from '../appService';
 import { ConfigService } from '../configService';
@@ -15,6 +16,9 @@ export class PostFormComponent implements OnInit {
 
     recaptchaSiteKey: string;
     recaptchaToken: string;
+
+    @ViewChild('reCaptcha')
+    reCaptcha: ReCaptchaComponent;
 
     model: ICreatePostModel = {
         email: null,
@@ -45,6 +49,9 @@ export class PostFormComponent implements OnInit {
             this.model.parentPostId = this.parentPostId;
         this.appService
             .createPost(this.model, this.recaptchaToken)
+            .finally(() => {
+                this.reCaptcha.reset();
+            })
             .subscribe(res => {
                 this.model = {
                     email: null,

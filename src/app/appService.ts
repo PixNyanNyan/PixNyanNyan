@@ -66,6 +66,7 @@ export interface IPost {
     parentPostId?: number;
     title: string;
     author: string;
+    tripcode?: string;
     email: string;
     createdAt: Date | string;
     updatedAt: Date | string;
