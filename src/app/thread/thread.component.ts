@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Broadcaster } from 'ng2-cable/js/index';
 
 import { AppService, IPost } from '../appService';
+import { PostFormComponent } from '../post-form/post-form.component';
 
 @Component({
     selector: 'app-thread',
@@ -12,6 +13,9 @@ import { AppService, IPost } from '../appService';
 export class ThreadComponent implements OnInit {
     threadId: number;
     thread: IPost;
+
+    @ViewChild('postForm')
+    postForm: PostFormComponent;
 
     constructor(
         private router: Router,
@@ -31,6 +35,15 @@ export class ThreadComponent implements OnInit {
                 }, error => {
                     // TODO 該当記事がみつかりません
                 });
+        });
+        route.queryParams.map(params => params['r']).filter(r => r).subscribe(r => {
+            if (this.postForm == null) {
+                setTimeout(() => {
+                    this.postForm.insertMessage('>>No.' + r + '\n');
+                }, 300);
+                return;
+            }
+            this.postForm.insertMessage('>>No.' + r + '\n');
         });
 
         this.broadcaster

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ReCaptchaComponent } from 'angular2-recaptcha';
 
 import { ICreatePostModel, AppService } from '../appService';
@@ -19,6 +19,9 @@ export class PostFormComponent implements OnInit {
 
     @ViewChild('reCaptcha')
     reCaptcha: ReCaptchaComponent;
+
+    @ViewChild('message')
+    message: ElementRef;
 
     model: ICreatePostModel = {
         email: null,
@@ -41,6 +44,14 @@ export class PostFormComponent implements OnInit {
 
     handleCorrectCaptcha(token) {
         this.recaptchaToken = token;
+    }
+
+    insertMessage(text: string) {
+        var textArea: HTMLTextAreaElement = this.message.nativeElement;
+        var pos = textArea.selectionStart;
+        var oldMessage = this.model.message || '';
+        this.model.message = oldMessage.substring(0, pos) + text + oldMessage.substring(pos);
+        textArea.focus();
     }
 
     onSubmit() {

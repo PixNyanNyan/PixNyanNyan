@@ -11,7 +11,7 @@
 <tr><td class="Form_bg"><b>名 稱</b></td><td><input type="text" name="author" size="28" [(ngModel)]="model.author" /></td></tr>
 <tr><td class="Form_bg"><b>E-mail</b></td><td><input type="text" name="email" size="28" [(ngModel)]="model.email" /></td></tr>
 <tr><td class="Form_bg"><b>標 題</b></td><td><input type="text" name="title" size="28" [(ngModel)]="model.title" /><input type="submit" name="sendbtn" value="送 出" /></td></tr>
-<tr><td class="Form_bg"><b>內 文</b></td><td><textarea name="message" cols="48" rows="4" style="width: 400px; height: 80px;" [(ngModel)]="model.message"></textarea></td></tr>
+<tr><td class="Form_bg"><b>內 文</b></td><td><textarea #message name="message" cols="48" rows="4" style="width: 400px; height: 80px;" [(ngModel)]="model.message"></textarea></td></tr>
 <tr><td class="Form_bg"><b>附加圖檔</b></td><td><input type="file" name="upfile" id="fupfile" size="25" /><input class="hide" type="checkbox" name="reply" value="yes" />[<input type="checkbox" name="noimg" id="noimg" value="on" /><label for="noimg">無貼圖</label>]
 [<input type="checkbox" name="up_series" id="up_series" value="on" /><label for="up_series">連貼機能</label>]
 </td></tr>
