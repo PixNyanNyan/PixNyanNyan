@@ -12,6 +12,7 @@ import { AppService } from './appService';
 import { ConfigService } from './configService';
 
 import { AppComponent } from './app.component';
+import { MessageConverterPipe } from './messageConverter.pipe';
 import { HomeComponent } from './home/home.component';
 import { ThreadComponent } from './thread/thread.component';
 import { PostFormComponent } from './post-form/post-form.component';
@@ -25,7 +26,8 @@ import { StatusComponent } from './status/status.component';
     ThreadComponent,
     PostFormComponent,
     ThreadPostComponent,
-    StatusComponent
+    StatusComponent,
+    MessageConverterPipe
     ],
   imports: [
     RouterModule.forRoot(ROUTES, {
