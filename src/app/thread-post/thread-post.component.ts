@@ -22,10 +22,13 @@ export class ThreadPostComponent implements OnInit {
         message: string
     };
 
+    imageUrl: string = '';
+
     constructor(
         private config: ConfigService
     ) {
         this.defaultMessage = config.get('defaultMessage');
+        this.imageUrl = config.get('imageUrl');
     }
 
     ngOnInit() {

@@ -70,10 +70,14 @@ export interface IPost {
     email: string;
     createdAt: Date | string;
     updatedAt: Date | string;
-    imageFileName?: string;
-    imageFileSize?: number;
-    imageContentType?: string;
-    imageUpdatedAt?: Date | string;
+    image?: {
+        dimensions: number[];
+        fileName: string;
+        fileSize: number;
+        urlOrig: string;
+        urlMedium: string;
+        urlSmall: string;
+    };
     identityHash: string;
     message: string;
     locked?: boolean;

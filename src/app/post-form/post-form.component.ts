@@ -54,6 +54,11 @@ export class PostFormComponent implements OnInit {
         textArea.focus();
     }
 
+    fileChange($event) {
+        var files: File[] = $event.srcElement.files;
+        this.model.image = files[0];
+    }
+
     onSubmit() {
         console.log('onSubmit');
         if (this.parentPostId)
