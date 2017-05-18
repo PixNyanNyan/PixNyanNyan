@@ -5,6 +5,7 @@
   <input type="checkbox" [name]="thread?.id" value="delete" /><span class="title">{{thread?.title || defaultMessage.title}}</span>
   名稱: <span class="name">{{thread?.author || defaultMessage.author}}</span><span class="tripcode" *ngIf="thread?.tripcode">◆{{thread?.tripcode}}</span> [17/03/13(一)02:21 ID:{{thread?.identityHash}}] <a [routerLink]="['/thread', thread?.id || 0]" [queryParams]="{r: thread?.id}" [replaceUrl]="replyMode" class="qlink">No.{{thread?.id}}</a>&nbsp;<a *ngIf="!replyMode" [routerLink]="['thread', thread?.id]" >[回應]</a>
   <div class="quote" [innerHTML]="thread?.message || defaultMessage.message | messageConverter"></div>
+  <span *ngIf="!replyMode && thread?.replyCount > thread?.replies.length" class="warn_txt2">有回應 {{thread?.replyCount - thread?.replies.length}} 篇被省略。要閱讀所有回應請按下回應連結。</span>
 </div>
 
 <div class="reply" *ngFor="let post of thread?.replies" [id]="'r' + post.id">
