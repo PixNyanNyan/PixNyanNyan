@@ -1,49 +1,44 @@
 {
   "name": "pix-nyan-nyan",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^2.4.0",
-    "@angular/compiler": "^2.4.0",
-    "@angular/core": "^2.4.0",
-    "@angular/forms": "^2.4.0",
-    "@angular/http": "^2.4.0",
-    "@angular/platform-browser": "^2.4.0",
-    "@angular/platform-browser-dynamic": "^2.4.0",
-    "@angular/router": "^3.4.0",
-    "angular2-recaptcha": "0.5.0",
-    "change-case": "^3.0.1",
-    "core-js": "^2.4.1",
-    "ng2-cable": "^1.1.0",
-    "rxjs": "^5.1.0",
-    "zone.js": "^0.7.6"
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/platform-browser-dynamic": "^21.0.0",
+    "@angular/router": "^21.0.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.16.0",
+    "ng-recaptcha": "^13.2.1",
+    "angular2-actioncable": "^6.0.2",
+    "change-case": "^3.0.1"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0-rc.2",
-    "@angular/compiler-cli": "^2.4.0",
-    "@types/jasmine": "2.5.38",
-    "@types/node": "~6.0.60",
-    "codelyzer": "~2.0.0",
-    "jasmine-core": "~2.5.2",
-    "jasmine-spec-reporter": "~3.2.0",
-    "karma": "~1.4.1",
-    "karma-chrome-launcher": "~2.0.0",
-    "karma-cli": "~1.0.1",
-    "karma-jasmine": "~1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-coverage-istanbul-reporter": "^0.2.0",
-    "protractor": "~5.1.0",
-    "ts-node": "~2.0.0",
-    "tslint": "~4.5.0",
-    "typescript": "~2.1.6"
+    "@angular/build": "^21.0.4",
+    "@angular/cli": "^21.0.4",
+    "@angular/compiler-cli": "^21.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "~5.9.2"
+  },
+  "overrides": {
+    "angular2-actioncable": {
+      "rxjs": "~7.8.0",
+      "@angular/core": "^21.0.0"
+    },
+    "ng-recaptcha": {
+      "@angular/common": "^21.0.0",
+      "@angular/core": "^21.0.0",
+      "@angular/forms": "^21.0.0",
+      "@angular/platform-browser": "^21.0.0"
+    }
   }
 }

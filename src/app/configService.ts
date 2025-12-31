@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, ResponseContentType } from '@angular/http';
-import { Observable, Observer } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Observer, firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
     private _config: any;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
     }
 
     load() {
-        return new Promise((resolve, reject) => {
-            this.http.get('config.json')
-                .map(res => res.json())
-                .subscribe(res => {
-                    this._config = res;
-                    resolve(true);
-                });
+        // Modern Angular APP_INITIALIZER expects a Promise or Observable.
+        return firstValueFrom(this.http.get('config.json')).then(res => {
+             this._config = res;
+             return true;
         });
     }
 

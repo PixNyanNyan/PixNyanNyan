@@ -1,0 +1,12 @@
+{
+    "title": "Pix Nyan Nyan",
+    "apiUrl": "http://localhost:3000/api/",
+    "actionCableUrl": "ws://localhost:3000/cable",
+    "recaptchaSiteKey": "YOUR_RECAPTCHA_KEY",
+    "imageUrl": "http://localhost:3000/uploads/",
+    "defaultMessage": {
+        "title": "Default Title",
+        "author": "Anonymous",
+        "message": "Default Message"
+    }
+}
