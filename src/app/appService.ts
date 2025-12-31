@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, ResponseContentType } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 import { snakeCase } from 'change-case';
 
 import { ConfigService } from './configService';
-
-import 'rxjs/add/operator/map';
 
 /**
  * 伺服器服務
@@ -15,34 +13,40 @@ export class AppService {
     apiUrl: string;
 
     constructor(
-        private http: Http,
+        private http: HttpClient,
         private config: ConfigService
     ) {
         this.apiUrl = this.config.get('apiUrl');
     }
 
     getThreads(): Observable<IPost[]> {
-        return this.http.get(this.apiUrl + 'threads', {
-            responseType: ResponseContentType.Json
-        }).map(res => <IPost[]>res.json());
+        return this.http.get<IPost[]>(this.apiUrl + 'threads');
     }
 
     getThread(id: number): Observable<IPost> {
-        return this.http.get(this.apiUrl + 'threads/' + id, {
-            responseType: ResponseContentType.Json
-        }).map(res => <IPost>res.json());
+        return this.http.get<IPost>(this.apiUrl + 'threads/' + id);
     }
 
     createPost(model: ICreatePostModel, recaptchaToken: string): Observable<IPost> {
-        return Observable.create(observer => {
+        return new Observable((observer: Observer<IPost>) => {
             var formData: FormData = new FormData();
             var xhr: XMLHttpRequest = new XMLHttpRequest();
 
             formData.append('g-recaptcha-response', recaptchaToken);
+            // Type guard to ensure model key access is safe or cast to any
             for (let i in model) {
-                if (!model[i])
+                const key = i as keyof ICreatePostModel;
+                const value = model[key];
+                if (!value)
                     continue;
-                formData.append(`post[${snakeCase(i)}]`, model[i]);
+                // value can be File or string or number.
+                // FormData.append takes Blob (File is Blob) or string.
+                // number should be converted to string.
+                if (value instanceof File) {
+                    formData.append(`post[${snakeCase(i)}]`, value);
+                } else {
+                    formData.append(`post[${snakeCase(i)}]`, String(value));
+                }
             }
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
@@ -83,6 +87,7 @@ export interface IPost {
     locked?: boolean;
     admin?: boolean;
     replies?: IPost[];
+    replyCount?: number;
 }
 
 export interface ICreatePostModel {

@@ -1,20 +1,20 @@
-<div class="threadpost" [id]="'r' + thread?.id">
-  <div *ngIf="thread?.image">
-    檔名：<a [href]="imageUrl + thread?.image.urlOrig" target="_blank">{{thread?.image.fileName}}</a>-({{thread?.image.fileSize}} B, {{thread?.image.dimensions[0]}}x{{thread?.image.dimensions[1]}}) <small>[以預覽圖顯示]</small><br /><a [href]="imageUrl + thread?.image.urlOrig" target="_blank"><img [src]="imageUrl + thread?.image.urlSmall" class="img" /></a>
+<div class="threadpost" [id]="'r' + thread.id" *ngIf="thread">
+  <div *ngIf="thread.image">
+    檔名：<a [href]="imageUrl + thread.image.urlOrig" target="_blank">{{thread.image.fileName}}</a>-({{thread.image.fileSize}} B, {{thread.image.dimensions[0]}}x{{thread.image.dimensions[1]}}) <small>[以預覽圖顯示]</small><br /><a [href]="imageUrl + thread.image.urlOrig" target="_blank"><img [src]="imageUrl + thread.image.urlSmall" class="img" /></a>
   </div>
-  <input type="checkbox" [name]="thread?.id" value="delete" /><span class="title">{{thread?.title || defaultMessage.title}}</span>
-  名稱: <span class="name">{{thread?.author || defaultMessage.author}}</span><span class="tripcode" *ngIf="thread?.tripcode">◆{{thread?.tripcode}}</span> [17/03/13(一)02:21 ID:{{thread?.identityHash}}] <a [routerLink]="['/thread', thread?.id || 0]" [queryParams]="{r: thread?.id}" [replaceUrl]="replyMode" class="qlink">No.{{thread?.id}}</a>&nbsp;<a *ngIf="!replyMode" [routerLink]="['thread', thread?.id]" >[回應]</a>
-  <div class="quote" [innerHTML]="thread?.message || defaultMessage.message | messageConverter"></div>
-  <span *ngIf="!replyMode && thread?.replyCount > thread?.replies.length" class="warn_txt2">有回應 {{thread?.replyCount - thread?.replies.length}} 篇被省略。要閱讀所有回應請按下回應連結。</span>
+  <input type="checkbox" [name]="thread.id" value="delete" /><span class="title">{{thread.title || defaultMessage.title}}</span>
+  名稱: <span class="name">{{thread.author || defaultMessage.author}}</span><span class="tripcode" *ngIf="thread.tripcode">◆{{thread.tripcode}}</span> [17/03/13(一)02:21 ID:{{thread.identityHash}}] <a [routerLink]="['/thread', thread.id || 0]" [queryParams]="{r: thread.id}" [replaceUrl]="replyMode" class="qlink">No.{{thread.id}}</a>&nbsp;<a *ngIf="!replyMode" [routerLink]="['/thread', thread.id]" >[回應]</a>
+  <div class="quote" [innerHTML]="(thread.message || defaultMessage.message) | messageConverter"></div>
+  <span *ngIf="!replyMode && thread.replies && thread.replyCount && thread.replyCount > thread.replies.length" class="warn_txt2">有回應 {{thread.replyCount - thread.replies.length}} 篇被省略。要閱讀所有回應請按下回應連結。</span>
 </div>
 
-<div class="reply" *ngFor="let post of thread?.replies" [id]="'r' + post.id">
+<div class="reply" *ngFor="let post of thread.replies" [id]="'r' + post.id">
   <div *ngIf="post.image">
     檔名：<a [href]="imageUrl + post.image.urlOrig" target="_blank">{{post.image.fileName}}</a>-({{post.image.fileSize}} B, {{post.image.dimensions[0]}}x{{post.image.dimensions[1]}}) <small>[以預覽圖顯示]</small><br /><a [href]="imageUrl + post.image.urlOrig" target="_blank"><img [src]="imageUrl + post.image.urlSmall" class="img" /></a>
   </div>
   <input type="checkbox" [name]="post.id" value="delete" /><span class="title">{{post.title || defaultMessage.title}}</span>
-  名稱: <span class="name">{{post.author || defaultMessage.author}}</span><span class="tripcode" *ngIf="post.tripcode">◆{{post.tripcode}}</span> [17/03/13(一)02:21 ID:{{post.identityHash}}] <a [routerLink]="['/thread', thread?.id]" [queryParams]="{r: post.id}" [replaceUrl]="replyMode" class="qlink">No.{{post.id}}</a>&nbsp;
-  <div class="quote" [innerHTML]="post.message || defaultMessage.message | messageConverter"></div>
+  名稱: <span class="name">{{post.author || defaultMessage.author}}</span><span class="tripcode" *ngIf="post.tripcode">◆{{post.tripcode}}</span> [17/03/13(一)02:21 ID:{{post.identityHash}}] <a [routerLink]="['/thread', thread.id]" [queryParams]="{r: post.id}" [replaceUrl]="replyMode" class="qlink">No.{{post.id}}</a>&nbsp;
+  <div class="quote" [innerHTML]="(post.message || defaultMessage.message) | messageConverter"></div>
 </div>
 
 <hr />

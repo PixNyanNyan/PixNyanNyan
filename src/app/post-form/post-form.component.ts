@@ -1,35 +1,40 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ReCaptchaComponent } from 'angular2-recaptcha';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RecaptchaModule, RecaptchaComponent } from 'ng-recaptcha';
+import { finalize } from 'rxjs/operators';
 
 import { ICreatePostModel, AppService } from '../appService';
 import { ConfigService } from '../configService';
 
 @Component({
     selector: 'post-form',
+    standalone: true,
+    imports: [CommonModule, FormsModule, RecaptchaModule],
     templateUrl: './post-form.component.html',
     styleUrls: ['./post-form.component.css']
 })
 export class PostFormComponent implements OnInit {
 
     @Input()
-    parentPostId: number;
+    parentPostId!: number;
 
     recaptchaSiteKey: string;
-    recaptchaToken: string;
+    recaptchaToken!: string;
 
     @ViewChild('reCaptcha')
-    reCaptcha: ReCaptchaComponent;
+    reCaptcha!: RecaptchaComponent;
 
     @ViewChild('message')
-    message: ElementRef;
+    message!: ElementRef;
 
     model: ICreatePostModel = {
-        email: null,
-        title: null,
-        author: null,
-        message: null,
-        image: null,
-        parentPostId: null
+        email: undefined,
+        title: undefined,
+        author: undefined,
+        message: undefined,
+        image: undefined,
+        parentPostId: undefined
     };
 
     constructor(
@@ -42,7 +47,7 @@ export class PostFormComponent implements OnInit {
     ngOnInit() {
     }
 
-    handleCorrectCaptcha(token) {
+    handleCorrectCaptcha(token: string) {
         this.recaptchaToken = token;
     }
 
@@ -54,7 +59,7 @@ export class PostFormComponent implements OnInit {
         textArea.focus();
     }
 
-    fileChange($event) {
+    fileChange($event: any) {
         var files: File[] = $event.srcElement.files;
         this.model.image = files[0];
     }
@@ -65,17 +70,17 @@ export class PostFormComponent implements OnInit {
             this.model.parentPostId = this.parentPostId;
         this.appService
             .createPost(this.model, this.recaptchaToken)
-            .finally(() => {
+            .pipe(finalize(() => {
                 this.reCaptcha.reset();
-            })
+            }))
             .subscribe(res => {
                 this.model = {
-                    email: null,
-                    title: null,
-                    author: null,
-                    message: null,
-                    image: null,
-                    parentPostId: null
+                    email: undefined,
+                    title: undefined,
+                    author: undefined,
+                    message: undefined,
+                    image: undefined,
+                    parentPostId: undefined
                 };
             });
     }
