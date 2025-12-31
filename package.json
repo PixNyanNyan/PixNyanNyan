@@ -29,5 +29,17 @@
     "@angular/compiler-cli": "^21.0.0",
     "@types/node": "^20.0.0",
     "typescript": "~5.9.2"
+  },
+  "overrides": {
+    "angular2-actioncable": {
+      "rxjs": "~7.8.0",
+      "@angular/core": "^21.0.0"
+    },
+    "ng-recaptcha": {
+      "@angular/common": "^21.0.0",
+      "@angular/core": "^21.0.0",
+      "@angular/forms": "^21.0.0",
+      "@angular/platform-browser": "^21.0.0"
+    }
   }
 }
