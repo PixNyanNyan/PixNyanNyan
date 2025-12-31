@@ -1,28 +1,74 @@
 # PixNyanNyan
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.2.
+PixNyanNyan is a real-time image board application built with Angular 21. It allows users to browse threads, post comments, and interact in a dynamic environment powered by ActionCable for real-time updates.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+*   **Real-time Updates**: Uses `angular2-actioncable` to push new posts and updates instantly to connected clients.
+*   **Threaded Discussions**: Browse and participate in threads.
+*   **Spam Protection**: Integrated with Google reCAPTCHA.
+*   **Modern Angular**: Built with Angular 21, utilizing Standalone Components and Signals.
+*   **Configurable**: Runtime configuration via `public/config.json`.
 
-## Code scaffolding
+## Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+*   Node.js (Active LTS or Maintenance LTS version)
+*   npm
+
+## Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone <repository-url>
+    cd pix-nyan-nyan
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+## Configuration
+
+The application uses a runtime configuration file located at `public/config.json`. You can modify this file to point to your backend API and configure other settings.
+
+**`public/config.json`**
+```json
+{
+    "title": "Pix Nyan Nyan",
+    "apiUrl": "http://localhost:3000/api/",
+    "actionCableUrl": "ws://localhost:3000/cable",
+    "recaptchaSiteKey": "YOUR_RECAPTCHA_KEY",
+    "imageUrl": "http://localhost:3000/uploads/",
+    "defaultMessage": {
+        "title": "Default Title",
+        "author": "Anonymous",
+        "message": "Default Message"
+    }
+}
+```
+
+*   `apiUrl`: The URL of the backend API.
+*   `actionCableUrl`: The WebSocket URL for ActionCable.
+*   `recaptchaSiteKey`: Your Google reCAPTCHA v2 site key.
+*   `imageUrl`: Base URL for serving uploaded images.
+
+## Development Server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Project Structure
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+*   `src/app/home`: Home page component, displaying the list of threads.
+*   `src/app/thread`: Thread view component, displaying posts within a thread.
+*   `src/app/post-form`: Component for creating new posts/threads.
+*   `src/app/status`: Status page component.
+*   `src/app/services`: Application services (Broadcaster, Config, etc.).
 
-## Running end-to-end tests
+## License
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+[MIT](LICENSE)
